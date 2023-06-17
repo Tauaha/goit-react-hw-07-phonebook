@@ -4,17 +4,17 @@ import React, { useEffect } from 'react';
 import ContactsForm from './ContactsForm/ContactsForm';
 import ContactList from './ContactList/ContactList';
 import ContactFilter from './Filter/Filter';
-import { selectorError, selectorIsLoading } from 'redux/selectors';
+import { selectorIsLoading } from 'redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { contactsApi } from 'redux/contactsApi';
-
+import Loader from "components/Loader/Loader";
 
 
 
 export default function App () {
      const dispatch = useDispatch();
      const isLoading = useSelector(selectorIsLoading);
-     const error = useSelector(selectorError);
+    
    
      useEffect(() => {
        dispatch(contactsApi());
@@ -25,6 +25,7 @@ export default function App () {
   <ContactsForm />
        <h2>Contacts</h2>
   <ContactFilter  />
+  {isLoading && <Loader/>}
   <ContactList/>
     </div>
     
